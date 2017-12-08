@@ -180,11 +180,14 @@ def extract_hrv_power(rri, sample_rate):
     f_step = f[1] - f[0]
     lf_hrv_power = 0
     hf_hrv_power = 0
+    total_hrv_power = 0
     for x in zip(f.tolist(), psd.tolist()):
         if x[0] >= ECG_LF_HRV_CUTOFF[0] and x[0] < ECG_LF_HRV_CUTOFF[1]:
             lf_hrv_power += x[1]
+            total_hrv_power += x[1]
         elif x[0] >= ECG_HF_HRV_CUTOFF[0] and x[0] <= ECG_HF_HRV_CUTOFF[1]:
             hf_hrv_power += x[1]
+            total_hrv_power += x[1]
         elif x[0] > ECG_HF_HRV_CUTOFF[1]:
-            break
-    return lf_hrv_power * f_step, hf_hrv_power * f_step
+            total_hrv_power += x[1]
+    return lf_hrv_power / total_hrv_power * 100.0, hf_hrv_power / total_hrv_power * 100.0
