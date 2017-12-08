@@ -33,7 +33,7 @@ def classify():
         ['ppg45_cr', 'svri_cr'],
         ['ppg45_cr'],
         ['svri_cr'],
-        ['average_rri_cr', 'rmssd_cr', 'mf_hrv_power_cr', 'hf_hrv_power_cr'],
+        ['average_rri_cr', 'rmssd_cr', 'lf_hrv_power_cr', 'hf_hrv_power_cr'],
         ['average_skin_conductance_level_cr', 'minimum_skin_conductance_level_cr'],
     ]
     classifiers = [

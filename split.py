@@ -41,8 +41,8 @@ def split():
                             'average_rri_cr': get_change_ratio(data=block['ecg']['average_rri'], baseline=json_data[session_id]['rest']['ecg']['average_rri']),
                             'rmssd': block['ecg']['rmssd'],
                             'rmssd_cr': get_change_ratio(data=block['ecg']['rmssd'], baseline=json_data[session_id]['rest']['ecg']['rmssd']),
-                            'mf_hrv_power': block['ecg']['mf_hrv_power'],
-                            'mf_hrv_power_cr': get_change_ratio(data=block['ecg']['mf_hrv_power'], baseline=json_data[session_id]['rest']['ecg']['mf_hrv_power']),
+                            'lf_hrv_power': block['ecg']['lf_hrv_power'],
+                            'lf_hrv_power_cr': get_change_ratio(data=block['ecg']['lf_hrv_power'], baseline=json_data[session_id]['rest']['ecg']['lf_hrv_power']),
                             'hf_hrv_power': block['ecg']['hf_hrv_power'],
                             'hf_hrv_power_cr': get_change_ratio(data=block['ecg']['hf_hrv_power'], baseline=json_data[session_id]['rest']['ecg']['hf_hrv_power']),
                         })

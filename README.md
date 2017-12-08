@@ -289,7 +289,7 @@ min	CH1	CH2	CH9
         "sample_rate": <value>,
         "average_rri": <value>,
         "rmssd": <value>,
-        "mf_hrv_power": <value>,
+        "lf_hrv_power": <value>,
         "hf_hrv_power": <value>
       }
     },
@@ -324,7 +324,7 @@ min	CH1	CH2	CH9
           "sample_rate": <value>,
           "average_rri": <value>,
           "rmssd": <value>,
-          "mf_hrv_power": <value>,
+          "lf_hrv_power": <value>,
           "hf_hrv_power": <value>
         }
       },
@@ -363,8 +363,8 @@ min	CH1	CH2	CH9
         "average_rri_cr": <value>,
         "rmssd": <value>,
         "rmssd_cr": <value>,
-        "mf_hrv_power": <value>,
-        "mf_hrv_power_cr": <value>,
+        "lf_hrv_power": <value>,
+        "lf_hrv_power_cr": <value>,
         "hf_hrv_power": <value>,
         "hf_hrv_power_cr": <value>
       },
@@ -386,7 +386,7 @@ min	CH1	CH2	CH9
 ||Minimum skin conductance level|1|
 |ECG Electrodes|Heart rate (R-R interval, RRI)|1|
 ||Root mean squared successive difference (RMSSD)|1|
-||Mid-frequency heart rate variability (MF-HRV)|1|
+||Low-frequency heart rate variability (LF-HRV)|1|
 ||High-frequency heart rate variability (HF-HRV)|1|
 
 ### PPG-45 Feature Definition
@@ -468,8 +468,8 @@ BIOPAC_ECG_CHANNEL = 1
 BIOPAC_SKIN_CONDUCTANCE_CHANNEL = 3
 
 ECG_R_PEAK_DETECTION_THRESHOLD = 2.0
-ECG_MF_HRV_CUTOFF = [0.07, 0.15]
-ECG_HF_HRV_CUTOFF = [0.15, 0.5]
+ECG_LF_HRV_CUTOFF = [0.04, 0.15]
+ECG_HF_HRV_CUTOFF = [0.15, 0.4]
 
 TRAINING_DATA_RATIO = 0.75
 ```
@@ -544,9 +544,9 @@ avarage_rri = extract_average_rri(rri)
 rmssd = extract_rmssd(rri)
 ```
 
-##### Middle/High-Frequency Heart Rate Variability (MF/HF-HRV)
+##### Low/High-Frequency Heart Rate Variability (LF/HF-HRV)
 ```python
-mf_hrv_power, hf_hrv_power = extract_hrv_power(rri, sample_rate)
+lf_hrv_power, hf_hrv_power = extract_hrv_power(rri, sample_rate)
 ```
 
 ### Module: `ppg.learn`

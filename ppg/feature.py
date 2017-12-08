@@ -3,7 +3,7 @@
 import numpy as np
 from scipy.signal import argrelmax, argrelmin, welch
 from params import PPG_SAMPLE_RATE
-from params import ECG_MF_HRV_CUTOFF, ECG_HF_HRV_CUTOFF
+from params import ECG_LF_HRV_CUTOFF, ECG_HF_HRV_CUTOFF
 
 
 def extract_ppg45(single_waveform, sample_rate=PPG_SAMPLE_RATE):
@@ -178,13 +178,13 @@ def extract_rmssd(rri):
 def extract_hrv_power(rri, sample_rate):
     f, psd = welch(rri, sample_rate, nperseg=len(rri))
     f_step = f[1] - f[0]
-    mf_hrv_power = 0
+    lf_hrv_power = 0
     hf_hrv_power = 0
     for x in zip(f.tolist(), psd.tolist()):
-        if x[0] >= ECG_MF_HRV_CUTOFF[0] and x[0] < ECG_MF_HRV_CUTOFF[1]:
-            mf_hrv_power += x[1]
+        if x[0] >= ECG_LF_HRV_CUTOFF[0] and x[0] < ECG_LF_HRV_CUTOFF[1]:
+            lf_hrv_power += x[1]
         elif x[0] >= ECG_HF_HRV_CUTOFF[0] and x[0] <= ECG_HF_HRV_CUTOFF[1]:
             hf_hrv_power += x[1]
         elif x[0] > ECG_HF_HRV_CUTOFF[1]:
             break
-    return mf_hrv_power * f_step, hf_hrv_power * f_step
+    return lf_hrv_power * f_step, hf_hrv_power * f_step

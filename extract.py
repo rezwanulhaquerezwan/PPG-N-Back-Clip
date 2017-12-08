@@ -41,13 +41,13 @@ def extract():
                     if json_data[session_id]['rest']['ecg']['rri'] is not None:
                         json_data[session_id]['rest']['ecg']['average_rri'] = extract_average_rri(rri=json_data[session_id]['rest']['ecg']['rri'])
                         json_data[session_id]['rest']['ecg']['rmssd'] = extract_rmssd(rri=json_data[session_id]['rest']['ecg']['rri'])
-                        mf_hrv_power, hf_hrv_power = extract_hrv_power(rri=json_data[session_id]['rest']['ecg']['rri_interpolated'], sample_rate=json_data[session_id]['rest']['ecg']['sample_rate'])
-                        json_data[session_id]['rest']['ecg']['mf_hrv_power'] = mf_hrv_power
+                        lf_hrv_power, hf_hrv_power = extract_hrv_power(rri=json_data[session_id]['rest']['ecg']['rri_interpolated'], sample_rate=json_data[session_id]['rest']['ecg']['sample_rate'])
+                        json_data[session_id]['rest']['ecg']['lf_hrv_power'] = lf_hrv_power
                         json_data[session_id]['rest']['ecg']['hf_hrv_power'] = hf_hrv_power
                     else:
                         json_data[session_id]['rest']['ecg']['average_rri'] = None
                         json_data[session_id]['rest']['ecg']['rmssd'] = None
-                        json_data[session_id]['rest']['ecg']['mf_hrv_power'] = None
+                        json_data[session_id]['rest']['ecg']['lf_hrv_power'] = None
                         json_data[session_id]['rest']['ecg']['hf_hrv_power'] = None
                     del json_data[session_id]['rest']['ecg']['rri']
                     del json_data[session_id]['rest']['ecg']['rri_interpolated']
@@ -69,13 +69,13 @@ def extract():
                         if block['ecg']['rri'] is not None:
                             block['ecg']['average_rri'] = extract_average_rri(rri=block['ecg']['rri'])
                             block['ecg']['rmssd'] = extract_rmssd(rri=block['ecg']['rri'])
-                            mf_hrv_power, hf_hrv_power = extract_hrv_power(rri=block['ecg']['rri_interpolated'], sample_rate=block['ecg']['sample_rate'])
-                            block['ecg']['mf_hrv_power'] = mf_hrv_power
+                            lf_hrv_power, hf_hrv_power = extract_hrv_power(rri=block['ecg']['rri_interpolated'], sample_rate=block['ecg']['sample_rate'])
+                            block['ecg']['lf_hrv_power'] = lf_hrv_power
                             block['ecg']['hf_hrv_power'] = hf_hrv_power
                         else:
                             block['ecg']['average_rri'] = None
                             block['ecg']['rmssd'] = None
-                            block['ecg']['mf_hrv_power'] = None
+                            block['ecg']['lf_hrv_power'] = None
                             block['ecg']['hf_hrv_power'] = None
                         del block['ecg']['rri']
                         del block['ecg']['rri_interpolated']
