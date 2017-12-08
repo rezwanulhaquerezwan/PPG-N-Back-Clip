@@ -56,6 +56,11 @@ python extract.py
 python split.py
 ```
 
+### Statistics
+```sh
+python stats.py
+```
+
 ### Classification
 ```sh
 python classify.py
@@ -375,7 +380,7 @@ min	CH1	CH2	CH9
 ## Sensors and Features
 |Sensor|Feature|Dimension|
 |:--|:--|:-:|
-|PPG finger clip|PPG-45 (39 time-domain, 9 frequency-domain)|45|
+|PPG finger clip|PPG-45 (39 time-domain, 6 frequency-domain)|45|
 ||Stress-induced vascular response index (sVRI)|1|
 |Skin conductance electrodes|Average skin conductance level|1|
 ||Minimum skin conductance level|1|
@@ -399,7 +404,7 @@ min	CH1	CH2	CH9
 |10|<code>t<sub>2</sub></code>|Diastolic peak time|
 |11|<code>t<sub>3</sub></code>|Dicrotic notch time|
 |12|`∆T`|Time between systolic and diastolic peaks|
-|13|`w`|Full width at half systolic peak|
+|13|`w`|Time between half systolic peak points|
 |14|<code>A<sub>2</sub>/A<sub>1</sub></code>|Inflection point area ratio|
 |15|<code>t<sub>1</sub>/x</code>|Systolic peak rising slope|
 |16|<code>y/(t<sub>pi</sub>-t<sub>3</sub>)</code>|Diastolic peak falling slope|
@@ -428,10 +433,10 @@ min	CH1	CH2	CH9
 |39|<code>(t<sub>f1</sub>+t<sub>3</sub>)/t<sub>pi</sub></code>||
 |40|<code>f<sub>base</sub></code>|Fundamental component frequency|
 |41|<code>\|s<sub>base</sub>\|</code>|Fundamental component magnitude|
-|42|<code>f<sub>2</sub></code>|2<sup>nd</sup> harmonic frequency|
-|43|<code>\|s<sub>2</sub>\|</code>|2<sup>nd</sup> harmonic magnitude|
-|44|<code>f<sub>3</sub></code>|3<sup>rd</sup> harmonic frequency|
-|45|<code>\|s<sub>3</sub>\|</code>|3<sup>rd</sup> harmonic magnitude|
+|42|<code>f<sub>2nd</sub></code>|2<sup>nd</sup> harmonic frequency|
+|43|<code>\|s<sub>2nd</sub>\|</code>|2<sup>nd</sup> harmonic magnitude|
+|44|<code>f<sub>3rd</sub></code>|3<sup>rd</sup> harmonic frequency|
+|45|<code>\|s<sub>3rd</sub>\|</code>|3<sup>rd</sup> harmonic magnitude|
 
 ## API Reference
 ### Module: `ppg`
