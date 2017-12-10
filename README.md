@@ -692,7 +692,7 @@ semilogy(args, backend=None)
 [MIT License][license]
 
 [repository]: https://github.com/iRB-Lab/PPG-N-Back-Clip "iRB-Lab/PPG-N-Back-Clip"
-[license]: https://github.com/iRB-Lab/PPG-N-Back-Clip/LICENSE "License"
+[license]: https://github.com/iRB-Lab/PPG-N-Back-Clip/blob/master/LICENSE "License"
 [watch]: https://github.com/iRB-Lab/PPG-N-Back-Clip/watchers "Watchers"
 [star]: https://github.com/iRB-Lab/PPG-N-Back-Clip/stargazers "Stargazers"
 [fork]: https://github.com/iRB-Lab/PPG-N-Back-Clip/network "Forks"
