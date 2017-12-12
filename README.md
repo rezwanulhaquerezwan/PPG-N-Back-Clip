@@ -383,6 +383,48 @@ min	CH1	CH2	CH9
 }
 ```
 
+### Subject-Independent Feature Data
+- **Location:** `data/subject_independent/`
+- **Filename format:** `<participant>.json`
+
+###### Sample Data
+```js
+{
+  "train": {
+    "0": [
+      {
+        "ppg45": [
+          [ ... ],
+          ...
+        ],
+        "ppg45_cr": [
+          [ ... ],
+          ,,,
+        ],
+        "svri": [ ... ],
+        "svri_cr": [ ... ],
+        "average_skin_conductance_level": <value>,
+        "average_skin_conductance_level_cr": <value>,
+        "minimum_skin_conductance_level": <value>,
+        "minimum_skin_conductance_level_cr": <value>,
+        "average_rri": <value>,
+        "average_rri_cr": <value>,
+        "rmssd": <value>,
+        "rmssd_cr": <value>,
+        "lf_hrv_power": <value>,
+        "lf_hrv_power_cr": <value>,
+        "hf_hrv_power": <value>,
+        "hf_hrv_power_cr": <value>
+      },
+      ...
+    ],
+    "1": [ ... ],
+    "2": [ ... ]
+  },
+  "test": { ... }
+}
+```
+
 ## Sensors and Features
 |Sensor|Feature|Dimension|
 |:--|:--|:-:|
