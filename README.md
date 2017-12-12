@@ -665,7 +665,13 @@ semilogy(args, backend=None)
 │   ├── preprocessed/
 │   │   ├── <participant>.json
 │   │   └── ...
-│   └── extracted/
+│   ├── extracted/
+│   │   ├── <participant>.json
+│   │   └── ...
+│   ├── splited/
+│   │   ├── <participant>.json
+│   │   └── ...
+│   └── subject-independent/
 │       ├── <participant>.json
 │       └── ...
 ├── models/
@@ -686,6 +692,7 @@ semilogy(args, backend=None)
 ├── preprocess.py
 ├── extract.py
 ├── split.py
+├── subject_independent.py
 ├── stats.py
 ├── classify.py
 ├── requirements.txt
