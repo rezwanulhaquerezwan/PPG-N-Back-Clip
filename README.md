@@ -562,7 +562,7 @@ rri_interpolated = interpolate_rri(rri, rri_time, sample_rate)
 #### PPG Features
 ##### PPG-45
 ```python
-extract_ppg45(single_waveform, sample_rate=PPG_SAMPLE_RATE)
+features = extract_ppg45(single_waveform, sample_rate=PPG_SAMPLE_RATE)
 ```
 
 ##### Stress-Induced Vascular Response Index (sVRI)
