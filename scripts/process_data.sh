@@ -16,6 +16,10 @@ echo '$ venv/bin/python split.py'
 venv/bin/python split.py
 echo '--'
 
+echo '$ venv/bin/python subject_indenpendent.py'
+venv/bin/python subject_indenpendent.py
+echo '--'
+
 echo '$ venv/bin/python stats.py'
 venv/bin/python stats.py
 echo '--'

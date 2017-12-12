@@ -18,10 +18,10 @@ from ppg.learn import random_forest_classifier, adaboost_classifier, gradient_bo
 from ppg.learn import voting_classifier
 
 
-def classify():
-    splited_data_dir = os.path.join(BASE_DIR, 'data', 'splited')
-    model_dir = os.path.join(BASE_DIR, 'models')
-    result_dir = os.path.join(BASE_DIR, 'results')
+def classify(feature_data_dir='splited'):
+    splited_data_dir = os.path.join(BASE_DIR, 'data', feature_data_dir)
+    model_dir = os.path.join(BASE_DIR, 'models', feature_data_dir)
+    result_dir = os.path.join(BASE_DIR, 'results', feature_data_dir)
 
 
     level_sets = [
@@ -30,10 +30,15 @@ def classify():
         ['1', '2'],
     ]
     feature_type_sets = [
+        ['ppg45', 'svri'],
         ['ppg45_cr', 'svri_cr'],
+        ['ppg45'],
         ['ppg45_cr'],
+        ['svri'],
         ['svri_cr'],
+        ['average_rri', 'rmssd', 'lf_hrv_power', 'hf_hrv_power'],
         ['average_rri_cr', 'rmssd_cr', 'lf_hrv_power_cr', 'hf_hrv_power_cr'],
+        ['average_skin_conductance_level', 'minimum_skin_conductance_level'],
         ['average_skin_conductance_level_cr', 'minimum_skin_conductance_level_cr'],
     ]
     classifiers = [
@@ -119,4 +124,5 @@ def classify():
 
 
 if __name__ == '__main__':
-    classify()
+    classify(feature_data_dir='splited')
+    classify(feature_data_dir='subject_independent')
