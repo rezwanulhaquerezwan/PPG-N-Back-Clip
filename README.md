@@ -54,6 +54,7 @@ python extract.py
 ##### Training set and test set spliting
 ```sh
 python split.py
+python subject_independent.py
 ```
 
 ### Statistics
@@ -64,6 +65,11 @@ python stats.py
 ### Classification
 ```sh
 python classify.py
+```
+
+##### Run in background using `nohup` command via SSH connection to a remote server
+```sh
+nohup python classify.py &
 ```
 
 ## Data Definition
