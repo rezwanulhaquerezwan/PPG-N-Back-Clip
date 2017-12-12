@@ -671,7 +671,7 @@ semilogy(args, backend=None)
 │   ├── splited/
 │   │   ├── <participant>.json
 │   │   └── ...
-│   └── subject-independent/
+│   └── subject_independent/
 │       ├── <participant>.json
 │       └── ...
 ├── models/

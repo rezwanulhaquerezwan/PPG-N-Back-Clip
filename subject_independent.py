@@ -22,7 +22,7 @@ def merge(feature_data_1, feature_data_2):
 
 def subject_independent():
     extracted_data_dir = os.path.join(BASE_DIR, 'data', 'extracted')
-    subject_independent_data_dir = os.path.join(BASE_DIR, 'data', 'subject-independent')
+    subject_independent_data_dir = os.path.join(BASE_DIR, 'data', 'subject_independent')
 
     if exist(pathname=extracted_data_dir):
         all_subject_data = {}

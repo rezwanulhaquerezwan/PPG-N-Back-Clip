@@ -125,4 +125,4 @@ def classify(feature_data_dir='splited'):
 
 if __name__ == '__main__':
     classify(feature_data_dir='splited')
-    classify(feature_data_dir='subject-independent')
+    classify(feature_data_dir='subject_independent')
