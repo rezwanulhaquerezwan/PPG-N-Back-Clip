@@ -753,6 +753,6 @@ semilogy(args, backend=None)
 [fork]: https://github.com/iRB-Lab/PPG-N-Back-Clip/network "Forks"
 
 [macos]: https://www.apple.com/macos/ "macOS"
-[python]: https://docs.python.org/2/ "Python 2.7"
+[python]: https://docs.python.org/ "Python 3"
 [pip]: https://pypi.python.org/pypi/pip "Pip"
 [virtualenv]: https://virtualenv.pypa.io/en/stable/ "Virtualenv"
