@@ -1,5 +1,5 @@
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)][repository]
-[![Python](https://img.shields.io/badge/python-3.4/3.5-blue.svg)][python]
+[![Python](https://img.shields.io/badge/python-3.4+-blue.svg)][python]
 [![License](https://img.shields.io/github/license/iRB-Lab/PPG-N-Back-Clip.svg)][license]
 [![Watchers](https://img.shields.io/github/watchers/iRB-Lab/PPG-N-Back-Clip.svg?style=social&label=Watch)][watch]
 [![Stargazers](https://img.shields.io/github/stars/iRB-Lab/PPG-N-Back-Clip.svg?style=social&label=Star)][star]
@@ -11,7 +11,7 @@ Photoplethysmogram-based Real-time Cognitive Load Assessment Using Multi-feature
 ## Installation
 ### Requirements
 - [macOS][macos] (Recommended)
-- [Python 3.4/3.5][python]
+- [Python 3.4+][python]
 - [Pip][pip]
 - [Virtualenv][virtualenv]
 
