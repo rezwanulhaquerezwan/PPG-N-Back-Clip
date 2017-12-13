@@ -1,10 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import sys
-reload(sys)
-sys.setdefaultencoding('utf-8');
-
-
 import os
 import fnmatch
 from datetime import datetime, timedelta
@@ -56,7 +51,7 @@ def segment():
                 }
                 for block in raw_json_data['blocks']:
                     if block['stimuli'][0]['timestamp']['load'] is None:
-                        print 'Skip one invalid block in \'%s\'.' % filename_with_ext
+                        print('Skip one invalid block in \'%s\'.' % filename_with_ext)
                         completeness[participant] = False
                         continue
                     output_data[participant][session_id]['blocks'].append({
@@ -94,22 +89,22 @@ def segment():
                 completeness[participant] = False
                 continue
             if raw_ppg_data_start_time > output_data[participant][session_id]['rest']['start_time']:
-                print 'Recoding data started too late in \'%s\': %s > %s' % (filename_with_ext, raw_ppg_data_start_time, output_data[participant][session_id]['rest']['start_time'])
+                print('Recoding data started too late in \'%s\': %s > %s' % (filename_with_ext, raw_ppg_data_start_time, output_data[participant][session_id]['rest']['start_time']))
             pathname = os.path.join(raw_ppg_data_dir, filename_with_ext)
             raw_ppg_data = load_text(pathname=pathname)
             if raw_ppg_data is not None:
-                raw_ppg_data = map(float, raw_ppg_data)
+                raw_ppg_data = list(map(float, raw_ppg_data))
                 tdelta = output_data[participant][session_id]['rest']['start_time'] - raw_ppg_data_start_time
                 if tdelta.total_seconds() < 0:
-                    print 'Skip \'rest\' PPG data.'
+                    print('Skip \'rest\' PPG data.')
                     completeness[participant] = False
                     continue
                 start_index = int(tdelta.total_seconds() * PPG_SAMPLE_RATE)
                 length = REST_DURATION * PPG_SAMPLE_RATE
-                end_index = start_index + length
+                end_index = int(start_index + length)
                 ppg_data = raw_ppg_data[start_index:end_index]
                 if len(ppg_data) < length:
-                    print 'Not enough \'rest\' PPG data (%s < %s). Skip.' % (len(ppg_data), length)
+                    print('Not enough \'rest\' PPG data (%s < %s). Skip.' % (len(ppg_data), length))
                     completeness[participant] = False
                     continue
                 output_data[participant][session_id]['rest']['ppg']['sample_rate'] = PPG_SAMPLE_RATE
@@ -117,15 +112,15 @@ def segment():
                 for block in output_data[participant][session_id]['blocks']:
                     tdelta = block['start_time'] - raw_ppg_data_start_time
                     if tdelta.total_seconds() < 0:
-                        print 'Skip one block PPG data.'
+                        print('Skip one block PPG data.')
                         completeness[participant] = False
                         continue
                     start_index = int(tdelta.total_seconds() * PPG_SAMPLE_RATE)
                     length = BLOCK_DURATION * PPG_SAMPLE_RATE
-                    end_index = start_index + length
+                    end_index = int(start_index + length)
                     ppg_data = raw_ppg_data[start_index:end_index]
                     if len(ppg_data) < length:
-                        print 'Not enough one block PPG data (%s < %s). Skip.' % (len(ppg_data), length)
+                        print('Not enough one block PPG data (%s < %s). Skip.' % (len(ppg_data), length))
                         completeness[participant] = False
                         continue
                     block['ppg']['sample_rate'] = PPG_SAMPLE_RATE
@@ -148,16 +143,16 @@ def segment():
                 raw_skin_conductance_data = [float(line.split('\t')[BIOPAC_SKIN_CONDUCTANCE_CHANNEL].strip()) for line in raw_biopac_data[BIOPAC_HEADER_LINES:]]
                 tdelta = pre_tdelta
                 if tdelta.total_seconds() < 0:
-                    print 'Skip \'rest\' ECG/skin conductance data.'
+                    print('Skip \'rest\' ECG/skin conductance data.')
                     completeness[participant] = False
                     continue
                 start_index = int(tdelta.total_seconds() * sample_rate)
                 length = REST_DURATION * sample_rate
-                end_index = start_index + length
+                end_index = int(start_index + length)
                 ecg_data = raw_ecg_data[start_index:end_index]
                 skin_conductance_data = raw_skin_conductance_data[start_index:end_index]
                 if len(ecg_data) < length:
-                    print 'Not enough \'rest\' ECG/skin conductance data (%s < %s). Skip.' % (len(ecg_data), length)
+                    print('Not enough \'rest\' ECG/skin conductance data (%s < %s). Skip.' % (len(ecg_data), length))
                     completeness[participant] = False
                     continue
                 output_data[participant][session_id]['rest']['ecg']['sample_rate'] = sample_rate
@@ -167,16 +162,16 @@ def segment():
                 for block in output_data[participant][session_id]['blocks']:
                     tdelta = block['start_time'] - output_data[participant][session_id]['rest']['start_time'] + pre_tdelta
                     if tdelta.total_seconds() < 0:
-                        print 'Skip one block ECG/skin conductance data.'
+                        print('Skip one block ECG/skin conductance data.')
                         completeness[participant] = False
                         continue
                     start_index = int(tdelta.total_seconds() * sample_rate)
                     length = BLOCK_DURATION * sample_rate
-                    end_index = start_index + length
+                    end_index = int(start_index + length)
                     ecg_data = raw_ecg_data[start_index:end_index]
                     skin_conductance_data = raw_skin_conductance_data[start_index:end_index]
                     if len(ecg_data) < length:
-                        print 'Not enough one block ECG/skin conductance data (%s < %s). Skip.' % (len(ecg_data), length)
+                        print('Not enough one block ECG/skin conductance data (%s < %s). Skip.' % (len(ecg_data), length))
                         completeness[participant] = False
                         continue
                     block['ecg']['sample_rate'] = sample_rate

@@ -1,10 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import sys
-reload(sys)
-sys.setdefaultencoding('utf-8');
-
-
 import os
 import fnmatch
 from ppg import BASE_DIR
@@ -26,30 +21,25 @@ def classify(feature_data_dir='splited'):
 
     level_sets = [
         ['0', '2'],
-        ['0', '1'],
-        ['1', '2'],
+        # ['0', '1'],
+        # ['1', '2'],
     ]
     feature_type_sets = [
-        ['ppg45', 'svri'],
-        ['ppg45_cr', 'svri_cr'],
-        ['ppg45'],
+        # ['ppg45_cr', 'svri_cr'],
         ['ppg45_cr'],
-        ['svri'],
-        ['svri_cr'],
-        ['average_rri', 'rmssd', 'lf_hrv_power', 'hf_hrv_power'],
-        ['average_rri_cr', 'rmssd_cr', 'lf_hrv_power_cr', 'hf_hrv_power_cr'],
-        ['average_skin_conductance_level', 'minimum_skin_conductance_level'],
-        ['average_skin_conductance_level_cr', 'minimum_skin_conductance_level_cr'],
+        # ['svri_cr'],
+        # ['average_rri_cr', 'rmssd_cr', 'lf_hrv_power_cr', 'hf_hrv_power_cr'],
+        # ['average_skin_conductance_level_cr', 'minimum_skin_conductance_level_cr'],
     ]
     classifiers = [
         ('logistic_regression', logistic_regression_classifier, ),
-        ('support_vector', support_vector_classifier, ),
-        ('gaussian_naive_bayes', gaussian_naive_bayes_classifier, ),
-        ('decision_tree', decision_tree_classifier, ),
-        ('random_forest', random_forest_classifier, ),
-        ('adaboost', adaboost_classifier, ),
-        ('gradient_boosting', gradient_boosting_classifier, ),
-        ('voting', voting_classifier, ), # voting classifier has to be the LAST item in the list
+        # ('support_vector', support_vector_classifier, ),
+        # ('gaussian_naive_bayes', gaussian_naive_bayes_classifier, ),
+        # ('decision_tree', decision_tree_classifier, ),
+        # ('random_forest', random_forest_classifier, ),
+        # ('adaboost', adaboost_classifier, ),
+        # ('gradient_boosting', gradient_boosting_classifier, ),
+        # ('voting', voting_classifier, ), # voting classifier has to be the LAST item in the list
     ]
 
 
@@ -86,7 +76,7 @@ def classify(feature_data_dir='splited'):
                                 dump_model(model=classifier, pathname=model_pathname)
                             score = classifier.score(test_features, test_labels)
                             round_score = round(score)
-                            print participant, score, round_score, level_set_name, feature_type_set_name, classifier_name
+                            print(participant, score, round_score, level_set_name, feature_type_set_name, classifier_name)
                             result_data[level_set_name][feature_type_set_name][classifier_name]['score'][participant] = score
                             result_data[level_set_name][feature_type_set_name][classifier_name]['round_score'][participant] = round_score
 

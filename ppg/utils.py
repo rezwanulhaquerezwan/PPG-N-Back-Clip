@@ -27,28 +27,28 @@ def exist(pathname, overwrite=False, display_info=True):
     if os.path.exists(pathname):
         if overwrite:
             if display_info:
-                print u'%s: %s exists. Overwrite.' % (__path_type(pathname), pathname)
+                print('%s: %s exists. Overwrite.' % (__path_type(pathname), pathname))
             os.remove(pathname)
             return False
         else:
             if display_info:
-                print u'%s: %s exists.' % (__path_type(pathname), pathname)
+                print('%s: %s exists.' % (__path_type(pathname), pathname))
             return True
     else:
         if display_info:
-            print u'%s: %s does not exist.' % (__path_type(pathname), pathname)
+            print('%s: %s does not exist.' % (__path_type(pathname), pathname))
         return False
 
 
 def load_text(pathname, display_info=True):
     if exist(pathname=pathname, display_info=display_info):
-        with open(pathname, 'r') as f:
+        with open(pathname, 'rt', newline='') as f:
             return [line.strip() for line in f.readlines()]
 
 
 def load_json(pathname, display_info=True):
     if exist(pathname=pathname, display_info=display_info):
-        with open(pathname, 'r') as f:
+        with open(pathname, 'rt', newline='') as f:
             return json.load(f)
 
 
@@ -56,14 +56,14 @@ def dump_json(data, pathname, overwrite=False, display_info=True):
     make_dirs_for_file(pathname)
     if not exist(pathname=pathname, overwrite=overwrite, display_info=display_info):
         if display_info:
-            print 'Write to file: %s' % pathname
-        with open(pathname, 'w') as f:
+            print('Write to file: %s' % pathname)
+        with open(pathname, 'wt', newline='') as f:
             json.dump(data, f)
 
 
 def load_model(pathname, display_info=True):
     if exist(pathname=pathname, display_info=display_info):
-        with open(pathname, 'r') as f:
+        with open(pathname, 'rb') as f:
             return pickle.load(f)
 
 
@@ -71,8 +71,8 @@ def dump_model(model, pathname, overwrite=False, display_info=True):
     make_dirs_for_file(pathname)
     if not exist(pathname=pathname, overwrite=overwrite, display_info=display_info):
         if display_info:
-            print 'Write to file: %s' % pathname
-        with open(pathname, 'w') as f:
+            print('Write to file: %s' % pathname)
+        with open(pathname, 'wb') as f:
             pickle.dump(model, f)
 
 
@@ -80,8 +80,8 @@ def export_csv(data, fieldnames, pathname, overwrite=False, display_info=True):
     make_dirs_for_file(pathname)
     if not exist(pathname=pathname, overwrite=overwrite, display_info=display_info):
         if display_info:
-            print 'Write to file: %s' % pathname
-        with open(pathname, 'w') as f:
+            print('Write to file: %s' % pathname)
+        with open(pathname, 'wt', newline='') as f:
             writer = csv.DictWriter(f, fieldnames=fieldnames, dialect='excel')
             writer.writeheader()
             for row in data:

@@ -2,8 +2,8 @@
 
 import numpy as np
 from scipy.signal import argrelmax, argrelmin, welch
-from params import PPG_SAMPLE_RATE
-from params import ECG_LF_HRV_CUTOFF, ECG_HF_HRV_CUTOFF
+from .params import PPG_SAMPLE_RATE
+from .params import ECG_LF_HRV_CUTOFF, ECG_HF_HRV_CUTOFF
 
 
 def extract_ppg45(single_waveform, sample_rate=PPG_SAMPLE_RATE):
@@ -12,10 +12,10 @@ def extract_ppg45(single_waveform, sample_rate=PPG_SAMPLE_RATE):
     features = []
     maxima_index = argrelmax(np.array(single_waveform))[0]
     minima_index = argrelmin(np.array(single_waveform))[0]
-    derivative_1 = np.diff(single_waveform, n=1) * float(sample_rate)
+    derivative_1 = np.diff(single_waveform, n=1) * sample_rate
     derivative_1_maxima_index = argrelmax(np.array(derivative_1))[0]
     derivative_1_minima_index = argrelmin(np.array(derivative_1))[0]
-    derivative_2 = np.diff(single_waveform, n=2) * float(sample_rate)
+    derivative_2 = np.diff(single_waveform, n=2) * sample_rate
     derivative_2_maxima_index = argrelmax(np.array(derivative_2))[0]
     derivative_2_minima_index = argrelmin(np.array(derivative_2))[0]
     sp_mag = np.abs(np.fft.fft(single_waveform, n=__next_pow2(len(single_waveform))*16))
@@ -31,7 +31,7 @@ def extract_ppg45(single_waveform, sample_rate=PPG_SAMPLE_RATE):
     z = single_waveform[minima_index[0]]
     features.append(z)
     # t_pi
-    t_pi = float(len(single_waveform)) / float(sample_rate)
+    t_pi = len(single_waveform) / sample_rate
     features.append(t_pi)
     # y/x
     features.append(y / x)
@@ -42,13 +42,13 @@ def extract_ppg45(single_waveform, sample_rate=PPG_SAMPLE_RATE):
     # (y-z)/x
     features.append((y - z) / x)
     # t_1
-    t_1 = float(maxima_index[0] + 1) / float(sample_rate)
+    t_1 = (maxima_index[0] + 1) / sample_rate
     features.append(t_1)
     # t_2
-    t_2 = float(minima_index[0] + 1) / float(sample_rate)
+    t_2 = (minima_index[0] + 1) / sample_rate
     features.append(t_2)
     # t_3
-    t_3 = float(maxima_index[1] + 1) / float(sample_rate)
+    t_3 = (maxima_index[1] + 1) / sample_rate
     features.append(t_3)
     # delta_t
     delta_t = t_3 - t_2
@@ -66,7 +66,7 @@ def extract_ppg45(single_waveform, sample_rate=PPG_SAMPLE_RATE):
             width += 1
         else:
             break
-    features.append(float(width) / float(sample_rate))
+    features.append(width / sample_rate)
     # A_2/A_1
     features.append(sum(single_waveform[:maxima_index[0]]) / sum(single_waveform[maxima_index[0]:]))
     # t_1/x
@@ -82,16 +82,16 @@ def extract_ppg45(single_waveform, sample_rate=PPG_SAMPLE_RATE):
     # delta_t/t_pi
     features.append(delta_t / t_pi)
     # t_a1
-    t_a1 = float(derivative_1_maxima_index[0]) / float(sample_rate)
+    t_a1 = derivative_1_maxima_index[0] / sample_rate
     features.append(t_a1)
     # t_b1
-    t_b1 = float(derivative_1_minima_index[0]) / float(sample_rate)
+    t_b1 = derivative_1_minima_index[0] / sample_rate
     features.append(t_b1)
     # t_e1
-    t_e1 = float(derivative_1_maxima_index[1]) / float(sample_rate)
+    t_e1 = derivative_1_maxima_index[1] / sample_rate
     features.append(t_e1)
     # t_f1
-    t_f1 = float(derivative_1_minima_index[1]) / float(sample_rate)
+    t_f1 = derivative_1_minima_index[1] / sample_rate
     features.append(t_f1)
     # b_2/a_2
     a_2 = derivative_2[derivative_2_maxima_index[0]]
@@ -103,10 +103,10 @@ def extract_ppg45(single_waveform, sample_rate=PPG_SAMPLE_RATE):
     # (b_2+e_2)/a_2
     features.append((b_2 + e_2) / a_2)
     # t_a2
-    t_a2 = float(derivative_2_maxima_index[0]) / float(sample_rate)
+    t_a2 = derivative_2_maxima_index[0] / sample_rate
     features.append(t_a2)
     # t_b2
-    t_b2 = float(derivative_2_minima_index[0]) / float(sample_rate)
+    t_b2 = derivative_2_minima_index[0] / sample_rate
     features.append(t_b2)
     # t_a1/t_pi
     features.append(t_a1 / t_pi)

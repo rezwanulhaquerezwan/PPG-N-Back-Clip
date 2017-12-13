@@ -1,10 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import sys
-reload(sys)
-sys.setdefaultencoding('utf-8');
-
-
 import os
 import fnmatch
 import numpy as np
@@ -91,7 +86,7 @@ def stats():
                     for block in json_data[session_id]['blocks']:
                         correct_count = sum([item['correct'] for item in block['stimuli'] if item['correct'] is not None])
                         stimuli_count = len(block['stimuli'])
-                        correct_rate = float(correct_count) / float(stimuli_count)
+                        correct_rate = correct_count / stimuli_count
                         svri = np.mean(block['ppg']['svri'])
                         output_data[session_id][block['level']] = {
                             'rsme': block['rsme'],

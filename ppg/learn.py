@@ -50,7 +50,7 @@ def logistic_regression_classifier(features, labels):
 
 def support_vector_classifier(features, labels):
     parameters = {
-        'C': map(float, [1] + range(10, 101, 10)),
+        'C': list(map(float, [1] + list(range(10, 101, 10)))),
         'kernel': ['linear', 'poly', 'rbf', 'sigmoid'],
     }
     classifier = GridSearchCV(SVC(random_state=1, probability=True), parameters, n_jobs=-1)
@@ -66,7 +66,7 @@ def gaussian_naive_bayes_classifier(features, labels):
 
 def decision_tree_classifier(features, labels):
     parameters = {
-        'max_depth': [None] + range(1, 11, 1),
+        'max_depth': [None] + list(range(1, 11, 1)),
     }
     classifier = GridSearchCV(DecisionTreeClassifier(random_state=1), parameters, n_jobs=-1)
     classifier.fit(features, labels)
@@ -75,8 +75,8 @@ def decision_tree_classifier(features, labels):
 
 def random_forest_classifier(features, labels):
     parameters = {
-        'n_estimators': range(10, 201, 10),
-        'max_depth': [None] + range(1, 11, 1),
+        'n_estimators': list(range(10, 201, 10)),
+        'max_depth': [None] + list(range(1, 11, 1)),
     }
     classifier = GridSearchCV(RandomForestClassifier(random_state=1), parameters, n_jobs=-1)
     classifier.fit(features, labels)
@@ -85,8 +85,8 @@ def random_forest_classifier(features, labels):
 
 def adaboost_classifier(features, labels):
     parameters = {
-        'n_estimators': range(50, 201, 10),
-        'learning_rate': [float(x) / 10.0 for x in range(1, 11, 1)],
+        'n_estimators': list(range(50, 201, 10)),
+        'learning_rate': [x / 10 for x in list(range(1, 11, 1))],
     }
     classifier = GridSearchCV(AdaBoostClassifier(random_state=1), parameters, n_jobs=-1)
     classifier.fit(features, labels)
@@ -95,9 +95,9 @@ def adaboost_classifier(features, labels):
 
 def gradient_boosting_classifier(features, labels):
     parameters = {
-        'learning_rate': [float(x) / 10.0 for x in range(1, 11, 1)],
-        'n_estimators': range(50, 201, 10),
-        'max_depth': range(1, 11, 1),
+        'learning_rate': [x / 10 for x in list(range(1, 11, 1))],
+        'n_estimators': list(range(50, 201, 10)),
+        'max_depth': list(range(1, 11, 1)),
     }
     classifier = GridSearchCV(GradientBoostingClassifier(random_state=1), parameters, n_jobs=-1)
     classifier.fit(features, labels)

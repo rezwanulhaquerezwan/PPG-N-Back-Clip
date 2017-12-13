@@ -3,9 +3,9 @@
 import numpy as np
 from scipy.signal import argrelmax, argrelmin, firwin, convolve
 from scipy.interpolate import interp1d
-from params import MINIMUM_PULSE_CYCLE, MAXIMUM_PULSE_CYCLE
-from params import PPG_SAMPLE_RATE, PPG_FIR_FILTER_TAP_NUM, PPG_FILTER_CUTOFF, PPG_SYSTOLIC_PEAK_DETECTION_THRESHOLD_COEFFICIENT
-from params import ECG_R_PEAK_DETECTION_THRESHOLD
+from .params import MINIMUM_PULSE_CYCLE, MAXIMUM_PULSE_CYCLE
+from .params import PPG_SAMPLE_RATE, PPG_FIR_FILTER_TAP_NUM, PPG_FILTER_CUTOFF, PPG_SYSTOLIC_PEAK_DETECTION_THRESHOLD_COEFFICIENT
+from .params import ECG_R_PEAK_DETECTION_THRESHOLD
 
 
 def find_extrema(signal):
@@ -22,11 +22,11 @@ def smooth_ppg_signal(signal, sample_rate=PPG_SAMPLE_RATE, numtaps=PPG_FIR_FILTE
 
 
 def validate_ppg_single_waveform(single_waveform, sample_rate=PPG_SAMPLE_RATE):
-    period = float(len(single_waveform)) / float(sample_rate)
+    period = len(single_waveform) / sample_rate
     if period < MINIMUM_PULSE_CYCLE or period > MAXIMUM_PULSE_CYCLE:
         return False
     max_index = np.argmax(single_waveform)
-    if float(max_index) / float(len(single_waveform)) >= 0.5:
+    if max_index / len(single_waveform) >= 0.5:
         return False
     if len(argrelmax(np.array(single_waveform))[0]) < 2:
         return False
@@ -68,10 +68,10 @@ def extract_rri(signal, sample_rate):
     for extremum_index, extremum in find_extrema(signal=signal):
         if last_extremum is not None and extremum - last_extremum > ECG_R_PEAK_DETECTION_THRESHOLD:
             if last_r_peak_index is not None:
-                interval = float(extremum_index - last_r_peak_index) / float(sample_rate)
+                interval = (extremum_index - last_r_peak_index) / sample_rate
                 if interval >= MINIMUM_PULSE_CYCLE and interval <= MAXIMUM_PULSE_CYCLE:
                     rri.append(interval)
-                    rri_time.append(float(extremum_index) / float(sample_rate))
+                    rri_time.append(extremum_index / sample_rate)
             last_r_peak_index = extremum_index
         last_extremum_index = extremum_index
         last_extremum = extremum
@@ -80,5 +80,5 @@ def extract_rri(signal, sample_rate):
 
 def interpolate_rri(rri, rri_time, sample_rate):
     f = interp1d(rri_time, rri, kind='cubic')
-    step = 1.0 / float(sample_rate)
+    step = 1 / sample_rate
     return f(np.arange(rri_time[0], rri_time[-1] - step, step)).tolist()

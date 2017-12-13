@@ -1,12 +1,8 @@
 # -*- coding: utf-8 -*-
 
-import sys
-reload(sys)
-sys.setdefaultencoding('utf-8');
-
-
 import os
 import fnmatch
+from functools import reduce
 from ppg import BASE_DIR
 from ppg.params import TRAINING_DATA_RATIO
 from ppg.utils import exist, load_json, dump_json, get_change_ratio
