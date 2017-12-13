@@ -21,25 +21,25 @@ def classify(feature_data_dir='splited'):
 
     level_sets = [
         ['0', '2'],
-        # ['0', '1'],
-        # ['1', '2'],
+        ['0', '1'],
+        ['1', '2'],
     ]
     feature_type_sets = [
-        # ['ppg45_cr', 'svri_cr'],
+        ['ppg45_cr', 'svri_cr'],
         ['ppg45_cr'],
-        # ['svri_cr'],
-        # ['average_rri_cr', 'rmssd_cr', 'lf_hrv_power_cr', 'hf_hrv_power_cr'],
-        # ['average_skin_conductance_level_cr', 'minimum_skin_conductance_level_cr'],
+        ['svri_cr'],
+        ['average_rri_cr', 'rmssd_cr', 'lf_hrv_power_cr', 'hf_hrv_power_cr'],
+        ['average_skin_conductance_level_cr', 'minimum_skin_conductance_level_cr'],
     ]
     classifiers = [
         ('logistic_regression', logistic_regression_classifier, ),
-        # ('support_vector', support_vector_classifier, ),
-        # ('gaussian_naive_bayes', gaussian_naive_bayes_classifier, ),
-        # ('decision_tree', decision_tree_classifier, ),
-        # ('random_forest', random_forest_classifier, ),
-        # ('adaboost', adaboost_classifier, ),
-        # ('gradient_boosting', gradient_boosting_classifier, ),
-        # ('voting', voting_classifier, ), # voting classifier has to be the LAST item in the list
+        ('support_vector', support_vector_classifier, ),
+        ('gaussian_naive_bayes', gaussian_naive_bayes_classifier, ),
+        ('decision_tree', decision_tree_classifier, ),
+        ('random_forest', random_forest_classifier, ),
+        ('adaboost', adaboost_classifier, ),
+        ('gradient_boosting', gradient_boosting_classifier, ),
+        ('voting', voting_classifier, ), # voting classifier has to be the LAST item in the list
     ]
 
 
