@@ -4,6 +4,7 @@ import os
 import json
 import pickle
 import csv
+from io import open
 
 
 def make_dirs_for_file(pathname):
