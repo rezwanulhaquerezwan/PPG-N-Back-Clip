@@ -13,10 +13,10 @@ from ppg.learn import random_forest_classifier, adaboost_classifier, gradient_bo
 from ppg.learn import voting_classifier
 
 
-def classify(feature_data_dir='splited'):
-    splited_data_dir = os.path.join(BASE_DIR, 'data', feature_data_dir)
-    model_dir = os.path.join(BASE_DIR, 'models', feature_data_dir)
-    result_dir = os.path.join(BASE_DIR, 'results', feature_data_dir)
+def classify(feature_data='splited'):
+    feature_data_dir = os.path.join(BASE_DIR, 'data', feature_data)
+    model_dir = os.path.join(BASE_DIR, 'models', feature_data)
+    result_dir = os.path.join(BASE_DIR, 'results', feature_data)
 
 
     level_sets = [
@@ -43,11 +43,11 @@ def classify(feature_data_dir='splited'):
     ]
 
 
-    if exist(pathname=splited_data_dir):
+    if exist(pathname=feature_data_dir):
         result_data = {}
-        for filename_with_ext in fnmatch.filter(os.listdir(splited_data_dir), '*.json'):
+        for filename_with_ext in fnmatch.filter(os.listdir(feature_data_dir), '*.json'):
             participant = os.path.splitext(filename_with_ext)[0]
-            pathname = os.path.join(splited_data_dir, filename_with_ext)
+            pathname = os.path.join(feature_data_dir, filename_with_ext)
             json_data = load_json(pathname=pathname)
             if json_data is not None:
                 for level_set in level_sets:
@@ -114,5 +114,5 @@ def classify(feature_data_dir='splited'):
 
 
 if __name__ == '__main__':
-    classify(feature_data_dir='splited')
-    classify(feature_data_dir='subject_independent')
+    classify(feature_data='splited')
+    classify(feature_data='subject_independent')

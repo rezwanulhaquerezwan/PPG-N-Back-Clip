@@ -72,10 +72,10 @@ def stats():
     if exist(pathname=extracted_data_dir):
         csv_data = []
         for filename_with_ext in fnmatch.filter(os.listdir(extracted_data_dir), '*.json'):
-            filename, file_ext = os.path.splitext(filename_with_ext)
+            participant = os.path.splitext(filename_with_ext)[0]
             output_data = {}
             csv_row = {
-                'name': filename,
+                'name': participant,
             }
             pathname = os.path.join(extracted_data_dir, filename_with_ext)
             json_data = load_json(pathname=pathname)

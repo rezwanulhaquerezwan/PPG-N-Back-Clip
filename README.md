@@ -49,6 +49,7 @@ python preprocess.py
 ##### Feature extraction
 ```sh
 python extract.py
+python merge.py
 ```
 
 ##### Training set and test set spliting
@@ -60,6 +61,11 @@ python subject_independent.py
 ### Statistics
 ```sh
 python stats.py
+```
+
+### Feature Selection
+```sh
+python select_feature.py
 ```
 
 ### Classification
@@ -341,6 +347,45 @@ min	CH1	CH2	CH9
 }
 ```
 
+### Merged Feature Data
+- **Location:** `data/merged/`
+- **Filename format:** `<participant>.json`
+
+###### Sample Data
+```js
+{
+  "0": [
+    {
+      "ppg45": [
+        [ ... ],
+        ...
+      ],
+      "ppg45_cr": [
+        [ ... ],
+        ,,,
+      ],
+      "svri": [ ... ],
+      "svri_cr": [ ... ],
+      "average_skin_conductance_level": <value>,
+      "average_skin_conductance_level_cr": <value>,
+      "minimum_skin_conductance_level": <value>,
+      "minimum_skin_conductance_level_cr": <value>,
+      "average_rri": <value>,
+      "average_rri_cr": <value>,
+      "rmssd": <value>,
+      "rmssd_cr": <value>,
+      "lf_hrv_power": <value>,
+      "lf_hrv_power_cr": <value>,
+      "hf_hrv_power": <value>,
+      "hf_hrv_power_cr": <value>
+    },
+    ...
+  ],
+  "1": [ ... ],
+  "2": [ ... ]
+}
+```
+
 ### Splited Feature Data
 - **Location:** `data/splited/`
 - **Filename format:** `<participant>.json`
@@ -603,7 +648,17 @@ lf_hrv_power, hf_hrv_power = extract_hrv_power(rri, sample_rate)
 train_features, train_labels, test_features, test_labels = get_feature_set(data, level_set, feature_type_set)
 ```
 
+##### Get Merged Feature Set
+```python
+features, labels = get_merged_feature_set(data, level_set, feature_type_set)
+```
+
 #### Classifiers
+##### Feature Selection Classifier
+```python
+classifier = feature_selection(features, labels, estimator=None)
+```
+
 ##### Logistic Regression Classifier
 ```python
 classifier = logistic_regression_classifier(features, labels)
@@ -710,6 +765,9 @@ semilogy(args, backend=None)
 │   ├── extracted/
 │   │   ├── <participant>.json
 │   │   └── ...
+│   ├── merged/
+│   │   ├── <participant>.json
+│   │   └── ...
 │   ├── splited/
 │   │   ├── <participant>.json
 │   │   └── ...
@@ -733,9 +791,11 @@ semilogy(args, backend=None)
 ├── segment.py
 ├── preprocess.py
 ├── extract.py
+├── merge.py
 ├── split.py
 ├── subject_independent.py
 ├── stats.py
+├── select_feature.py
 ├── classify.py
 ├── requirements.txt
 ├── README.md
