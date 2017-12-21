@@ -56,7 +56,11 @@ def subject_independent():
         for subject in all_subject_data:
             output_data = {
                 'train': reduce(lambda feature_data_1, feature_data_2: merge(feature_data_1, feature_data_2), [all_subject_data[participant] for participant in all_subject_data if participant != subject]),
-                'test': all_subject_data[subject],
+                'test': {
+                    '0': all_subject_data[subject]['0'][int(len(all_subject_data[subject]['0']) * TRAINING_DATA_RATIO):],
+                    '1': all_subject_data[subject]['1'][int(len(all_subject_data[subject]['1']) * TRAINING_DATA_RATIO):],
+                    '2': all_subject_data[subject]['2'][int(len(all_subject_data[subject]['2']) * TRAINING_DATA_RATIO):],
+                },
             }
             dump_json(data=output_data, pathname=os.path.join(subject_independent_data_dir, '%s.json' % subject), overwrite=True)
 
