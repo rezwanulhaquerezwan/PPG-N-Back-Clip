@@ -9,7 +9,7 @@ from io import open
 
 def make_dirs_for_file(pathname):
     try:
-        os.makedirs(os.path.split(pathname)[0])
+        os.makedirs(os.path.dirname(pathname))
     except:
         pass
 
